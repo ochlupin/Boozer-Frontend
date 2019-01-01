@@ -2,21 +2,20 @@ import React, { Component } from "react";
 import "./App.css";
 import CocktailsContainer from "./containers/CocktailsContainer";
 
+import { Header, Icon } from "semantic-ui-react";
+
 // App Component is responsible for:
+// 1. Render Header with title of Application
 // 1. Rendering CocktailsContainer component
-// 2. Own and handle state
-// 3. Fetch from backend API
 
 class App extends Component {
-  state = {
-    cocktails: []
-  };
-
-  componentDidMount() {}
-
   render() {
     return (
       <div>
+        <Header as="h1">
+          BOOZER APP
+          <Icon name="glass martini" size="large" />
+        </Header>
         <CocktailsContainer />
       </div>
     );
