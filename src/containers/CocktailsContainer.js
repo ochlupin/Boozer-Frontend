@@ -22,8 +22,7 @@ class CocktailsContainer extends React.Component {
     cocktails: [],
     ingredients: [],
     selectedCocktail: "",
-    searchTerm: "",
-    selectedCocktailData: {}
+    searchTerm: ""
   };
 
   // LIFECYCLE METHODS
@@ -58,9 +57,13 @@ class CocktailsContainer extends React.Component {
   };
 
   handleClickCocktail = selectedCocktail => {
-    this.setState({ selectedCocktail: selectedCocktail }, () => {
-      console.log("You selected this cocktail: ", this.selectedCocktail());
-    });
+    fetch(`${cocktailsAPI}/${selectedCocktail}`)
+      .then(r => r.json())
+      .then(d => this.setState({ selectedCocktail: d }));
+
+    // this.setState({ selectedCocktail: selectedCocktail }, () => {
+    //   console.log("You selected this cocktail: ", this.selectedCocktail());
+    // });
   };
 
   selectedCocktail = () =>

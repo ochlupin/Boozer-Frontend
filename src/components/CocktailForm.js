@@ -15,7 +15,7 @@ const CocktailForm = () => {
       <h3>Create a Cocktail</h3>
       <Form>
         <Form.Group widths="equal">
-          <Form.Field control={Input} label="Name" placeholder="Name" /> <br />
+          <Form.Field control={Input} label="Name" placeholder="Name" />
           <Form.Field
             control={TextArea}
             label="Description"
@@ -26,6 +26,7 @@ const CocktailForm = () => {
             label="Instructions"
             placeholder="Instructions"
           />
+          <Form.Field control={TextArea} label="Source" placeholder="Source" />
         </Form.Group>
         <h4>Proportions</h4>
         <Form.Group widths="equal">
