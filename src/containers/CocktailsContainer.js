@@ -50,16 +50,10 @@ class CocktailsContainer extends React.Component {
       });
   };
 
-  fetchSelectedCocktail = id => {
-    fetch(`${cocktailsAPI}/${id}`)
-      .then(r => r.json())
-      .then(d => this.setState({ selectedCocktail: d }));
-  };
-
   handleClickCocktail = selectedCocktail => {
     fetch(`${cocktailsAPI}/${selectedCocktail}`)
       .then(r => r.json())
-      .then(d => this.setState({ selectedCocktail: d }));
+      .then(data => this.setState({ selectedCocktail: data }));
 
     // this.setState({ selectedCocktail: selectedCocktail }, () => {
     //   console.log("You selected this cocktail: ", this.selectedCocktail());
@@ -86,7 +80,7 @@ class CocktailsContainer extends React.Component {
   render() {
     const cocktails = this.cocktailsToDisplay();
     const searchTerm = this.state.searchTerm;
-    const selectedCocktail = this.selectedCocktail();
+    const selectedCocktail = this.state.selectedCocktail;
     const updateSearchTerm = this.updateSearchTerm;
     const handleClickCocktail = this.handleClickCocktail;
     return (
@@ -96,6 +90,7 @@ class CocktailsContainer extends React.Component {
           updateSearchTerm={updateSearchTerm}
           searchTerm={searchTerm}
         />
+        <br />
         <CocktailDetail selectedCocktail={selectedCocktail} />
         <CocktailList
           cocktails={cocktails}

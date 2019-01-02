@@ -7,27 +7,46 @@ import { Card } from "semantic-ui-react";
 
 const CocktailDetail = props => {
   console.log("In CocktailDetail, props are: ", props);
+  console.log(
+    "In CocktailDetail, proportions are: ",
+    props.selectedCocktail.proportions
+  );
   const selectedCocktail = props.selectedCocktail;
 
-  let name = "";
-  let description = "";
-  let instructions = "";
-  let source = "";
-  if (selectedCocktail) {
-    name = selectedCocktail.name;
-    description = selectedCocktail.description;
-    instructions = selectedCocktail.instructions;
-    source = selectedCocktail.source;
+  let proportions;
+
+  if (selectedCocktail.proportions) {
+    proportions = selectedCocktail.proportions.map(proportion => {
+      return (
+        <li>
+          {proportion.amount}
+          {proportion.ingredient_name}
+        </li>
+      );
+    });
   }
 
+  const { name, description, instructions, source } = selectedCocktail;
+
   return (
-    <Card>
-      <Card.Header>{name}</Card.Header>
-      <Card.Meta>{source}</Card.Meta> <br />
-      <Card.Description>{description}</Card.Description> <br />
-      <Card.Description>{instructions}</Card.Description>
-    </Card>
+    <div>
+      <Card>
+        <Card.Header>{name}</Card.Header>
+        <Card.Meta>{source}</Card.Meta> <br />
+        <Card.Description>{description}</Card.Description> <br />
+        <Card.Description>{instructions}</Card.Description>
+        <h4>Ingredients</h4>
+        {proportions}
+      </Card>
+    </div>
   );
 };
 
 export default CocktailDetail;
+
+// if (selectedCocktail) {
+//   name = selectedCocktail.name;
+//   description = selectedCocktail.description;
+//   instructions = selectedCocktail.instructions;
+//   source = selectedCocktail.source;
+// }
