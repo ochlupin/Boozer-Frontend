@@ -4,6 +4,7 @@ import React from "react";
 import CocktailList from "../components/CocktailList";
 import CocktailFilter from "../components/CocktailFilter";
 import CocktailDetail from "../components/CocktailDetail";
+import CocktailForm from "../components/CocktailForm";
 
 // CocktailsContainer Component:
 // 1. Fetch from backend
@@ -87,6 +88,7 @@ class CocktailsContainer extends React.Component {
     const handleClickCocktail = this.handleClickCocktail;
     return (
       <div>
+        <CocktailForm /> <br />
         <CocktailFilter
           updateSearchTerm={updateSearchTerm}
           searchTerm={searchTerm}
