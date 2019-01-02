@@ -15,12 +15,11 @@ const CocktailDetail = props => {
 
   let proportions;
 
-  if (selectedCocktail.proportions) {
+  if (selectedCocktail) {
     proportions = selectedCocktail.proportions.map(proportion => {
       return (
-        <li>
-          {proportion.amount}
-          {proportion.ingredient_name}
+        <li key={proportion.id}>
+          {proportion.amount} - {proportion.ingredient_name}
         </li>
       );
     });
