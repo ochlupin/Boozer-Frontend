@@ -12,13 +12,15 @@ import CocktailDetail from "../components/CocktailDetail";
 // 4. renders CocktailFilter component
 // 5. renders Cocktail Detail component
 
-const cocktailAPI = "http://localhost:5000/api/v1/cocktails";
+const cocktailsAPI = "http://localhost:5000/api/v1/cocktails";
+const ingredientsAPI = "http://localhost:5000/api/v1/ingredients";
 
 class CocktailsContainer extends React.Component {
   // STATE
   state = {
     cocktails: [],
-    selectedCocktail: null,
+    ingredients: [],
+    selectedCocktail: "",
     searchTerm: "",
     selectedCocktailData: {}
   };
@@ -26,11 +28,12 @@ class CocktailsContainer extends React.Component {
   // LIFECYCLE METHODS
   componentDidMount() {
     this.fetchCocktails();
+    this.fetchIngredients();
   }
 
   // CLASS METHODS
   fetchCocktails = () => {
-    fetch(cocktailAPI)
+    fetch(cocktailsAPI)
       .then(r => r.json())
       .then(cocktailData => {
         this.setState({ cocktails: cocktailData }, () => {
@@ -39,16 +42,19 @@ class CocktailsContainer extends React.Component {
       });
   };
 
-  // fetchSelectedCocktail = () => {
-  //   const selectedCocktail = this.state.selectedCocktail
-  //     ? this.state.selectedCocktail
-  //     : "";
-  //   fetch(`http://localhost:5000/api/v1/cocktails/${selectedCocktail}`)
-  //     .then(r => r.json())
-  //     .then(selectedCocktailData => {
-  //       this.setState({ selectedCocktailData: selectedCocktailData });
-  //     });
-  // };
+  fetchIngredients = () => {
+    fetch(ingredientsAPI)
+      .then(r => r.json())
+      .then(ingredientData => {
+        this.setState({ ingredients: ingredientData });
+      });
+  };
+
+  fetchSelectedCocktail = id => {
+    fetch(`${cocktailsAPI}/${id}`)
+      .then(r => r.json())
+      .then(d => this.setState({ selectedCocktail: d }));
+  };
 
   handleClickCocktail = selectedCocktail => {
     this.setState({ selectedCocktail: selectedCocktail }, () => {
@@ -96,17 +102,3 @@ class CocktailsContainer extends React.Component {
 }
 
 export default CocktailsContainer;
-
-// NOTES
-
-// toggleCocktail = cocktail => {
-//   const current = this.state.cocktails;
-//   const idx = current.indexOf(cocktail);
-//   this.setState({
-//     cocktails: [
-//       ...current.slice(0, idx),
-//       { ...cocktail, clicked: !cocktail.clicked },
-//       ...current.slice(idx + 1)
-//     ]
-//   });
-// };
